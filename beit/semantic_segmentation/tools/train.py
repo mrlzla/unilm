@@ -130,7 +130,9 @@ def main():
     cfg.seed = args.seed
     meta['seed'] = args.seed
     meta['exp_name'] = osp.basename(args.config)
-
+    
+    #import ipdb; ipdb.set_trace()
+    
     model = build_segmentor(
         cfg.model,
         train_cfg=cfg.get('train_cfg'),

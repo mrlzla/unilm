@@ -289,7 +289,7 @@ class BEiT(nn.Module):
                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0.,
                  drop_path_rate=0., hybrid_backbone=None, norm_layer=None, init_values=None, use_checkpoint=False, 
                  use_abs_pos_emb=True, use_rel_pos_bias=False, use_shared_rel_pos_bias=False,
-                 out_indices=[3, 5, 7, 11]):
+                 out_indices=[3, 5, 7, 11], pretrained=None):
         super().__init__()
         norm_layer = norm_layer or partial(nn.LayerNorm, eps=1e-6)
         self.num_classes = num_classes
@@ -362,8 +362,11 @@ class BEiT(nn.Module):
             self.fpn4 = nn.Sequential(
                 nn.MaxPool2d(kernel_size=4, stride=4),
             )
-        self.apply(self._init_weights)
-        self.fix_init_weight()
+        if pretrained is None:
+            self.apply(self._init_weights)
+            self.fix_init_weight()
+        else:
+            self.init_weights(pretrained)
 
     def fix_init_weight(self):
         def rescale(param, layer_id):
