@@ -15,7 +15,7 @@ _base_ = [
     '../../_base_/models/upernet_beit.py', '../../_base_/datasets/deepfashion2.py',
     '../../_base_/default_runtime.py', '../../_base_/schedules/schedule_160k.py'
 ]
-crop_size = (672, 512)
+crop_size = (512, 512)
 
 model = dict(
     backbone=dict(
