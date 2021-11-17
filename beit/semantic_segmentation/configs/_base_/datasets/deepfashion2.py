@@ -24,7 +24,9 @@ test_pipeline = [
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='SETR_Resize', keep_ratio=True,
+                 crop_size=crop_size, setr_multi_scale=False),
+            dict(type='Pad', size=crop_size, pad_val=0),
             dict(type='RandomFlip'),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),

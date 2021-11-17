@@ -13,7 +13,7 @@
 # recommand use this config for BEiT models which are self-supervised pretrained and then intermediate fine-tuned on imagenet
 _base_ = [
     '../../_base_/models/upernet_beit.py', '../../_base_/datasets/deepfashion2.py',
-    '../../_base_/default_runtime.py', '../../_base_/schedules/schedule_160k.py'
+    '../../_base_/default_runtime.py', '../../_base_/schedules/schedule_deepfashion2.py'
 ]
 crop_size = (512, 512)
 
@@ -43,7 +43,7 @@ model = dict(
         in_channels=768,
         num_classes=14
     ), 
-    test_cfg = dict(mode='slide', crop_size=crop_size, stride=(341, 341))
+    test_cfg = dict(mode='slide', crop_size=crop_size, stride=(1, 1))
 )
 
 # AdamW optimizer, no weight decay for position embedding & layer norm in backbone
