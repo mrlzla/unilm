@@ -55,6 +55,7 @@ def train_segmentor(model,
             len(cfg.gpu_ids),
             dist=distributed,
             seed=cfg.seed,
+            pin_memory=False,
             drop_last=True) for ds in dataset
     ]
 
@@ -115,6 +116,7 @@ def train_segmentor(model,
             val_dataset,
             samples_per_gpu=1,
             workers_per_gpu=cfg.data.workers_per_gpu,
+            pin_memory=False,
             dist=distributed,
             shuffle=False)
         eval_cfg = cfg.get('evaluation', {})
